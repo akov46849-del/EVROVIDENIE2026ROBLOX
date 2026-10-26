@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Первое Евровидение в Roblox — 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a14;
+    --bg2:#12122a;
+    --pink:#ff2e88;
+    --purple:#8a2be2;
+    --blue:#00d4ff;
+    --gold:#ffd166;
+    --text:#ffffff;
+    --muted:#a0a0c0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Montserrat',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+    line-height:1.5;
+  }
+
+  /* ===== Фон-градиент с блёстками ===== */
+  .bg-glow{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(138,43,226,.35), transparent 45%),
+      radial-gradient(circle at 80% 20%, rgba(255,46,136,.30), transparent 45%),
+      radial-gradient(circle at 50% 90%, rgba(0,212,255,.20), transparent 50%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    background-attachment:fixed;
+  }
+  .stars{
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:
+      radial-gradient(2px 2px at 20% 30%, #fff, transparent),
+      radial-gradient(1px 1px at 60% 70%, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 80% 20%, #fff, transparent),
+      radial-gradient(1px 1px at 40% 80%, #fff, transparent),
+      radial-gradient(2px 2px at 90% 60%, #fff, transparent),
+      radial-gradient(1px 1px at 10% 90%, #fff, transparent);
+    background-size:100% 100%;
+    opacity:.35;
+    animation:twinkle 5s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle{from{opacity:.2}to{opacity:.6}}
+
+  /* ===== HERO ===== */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px;
+    position:relative;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 18px;
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(10px);
+    font-size:.8rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:25px;
+    animation:fadeUp .8s ease both;
+  }
+  .badge .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 12px var(--gold);
+    animation:pulse 1.5s infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.6}}
+
+  h1.title{
+    font-size:clamp(2.2rem, 7vw, 5.5rem);
+    font-weight:900;
+    line-height:1.05;
+    letter-spacing:-1px;
+    animation:fadeUp .8s .1s ease both;
+  }
+  h1.title .grad{
+    background:linear-gradient(90deg, var(--pink), var(--purple), var(--blue));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    background-size:200% auto;
+    animation:shine 6s linear infinite;
+  }
+  @keyframes shine{to{background-position:200% center}}
+
+  .subtitle{
+    font-size:clamp(1rem, 2.5vw, 1.35rem);
+    color:var(--muted);
+    max-width:640px;
+    margin:25px auto 40px;
+    animation:fadeUp .8s .2s ease both;
+  }
+
+  .hero-meta{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-bottom:40px;
+    animation:fadeUp .8s .3s ease both;
+  }
+  .meta-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:16px;
+    padding:14px 22px;
+    backdrop-filter:blur(10px);
+    min-width:130px;
+  }
+  .meta-card .label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .meta-card .value{font-size:1.1rem;font-weight:700;margin-top:4px}
+
+  .btn{
+    display:inline-block;
+    padding:16px 40px;
+    border-radius:999px;
+    font-weight:800;
+    font-size:1rem;
+    text-decoration:none;
+    color:#fff;
+    background:linear-gradient(90deg, var(--pink), var(--purple));
+    box-shadow:0 10px 40px rgba(255,46,136,.35);
+    transition:transform .25s, box-shadow .25s;
+    animation:fadeUp .8s .4s ease both;
+  }
+  .btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 15px 50px rgba(138,43,226,.55)}
+
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(30px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  /* ===== Секция участников ===== */
+  .section{
+    max-width:1200px;
+    margin:0 auto;
+    padding:80px 20px;
+  }
+  .section-head{
+    text-align:center;
+    margin-bottom:50px;
+  }
+  .section-head .kicker{
+    color:var(--pink);
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-size:.8rem;
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem, 4vw, 3rem);
+    font-weight:900;
+  }
+  .section-head p{color:var(--muted);margin-top:10px}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:20px;
+  }
+  .card{
+    position:relative;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    padding:24px 22px;
+    backdrop-filter:blur(10px);
+    overflow:hidden;
+    transition:transform .3s, border-color .3s, box-shadow .3s;
+    opacity:0;
+    transform:translateY(25px);
+  }
+  .card.visible{opacity:1;transform:translateY(0);transition:opacity .6s, transform .6s}
+  .card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg, rgba(255,46,136,.18), transparent 60%);
+    opacity:0;
+    transition:opacity .3s;
+  }
+  .card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,46,136,.6);
+    box-shadow:0 20px 50px rgba(138,43,226,.3);
+  }
+  .card:hover::before{opacity:1}
+
+  .card .flag{
+    font-size:2.4rem;
+    line-height:1;
+    margin-bottom:14px;
+    display:block;
+    filter:drop-shadow(0 4px 12px rgba(0,0,0,.4));
+  }
+  .card .country{
+    font-size:.75rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:6px;
+  }
+  .card .artist{
+    font-size:1.35rem;
+    font-weight:800;
+    position:relative;
+    z-index:1;
+  }
+  .card.special{
+    border-color:var(--gold);
+    background:linear-gradient(135deg, rgba(255,209,102,.15), rgba(255,255,255,.03));
+  }
+  .card.special .artist{color:var(--gold)}
+  .tag{
+    display:inline-block;
+    margin-top:10px;
+    font-size:.65rem;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:999px;
+    background:rgba(255,209,102,.2);
+    color:var(--gold);
+    border:1px solid rgba(255,209,102,.4);
+  }
+
+  /* ===== Голосование скоро ===== */
+  .vote-box{
+    margin:40px auto 0;
+    max-width:900px;
+    text-align:center;
+    padding:60px 30px;
+    border-radius:28px;
+    background:
+      radial-gradient(circle at top, rgba(138,43,226,.35), transparent 70%),
+      rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(12px);
+    position:relative;
+    overflow:hidden;
+  }
+  .vote-box::after{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:30px;
+    padding:2px;
+    background:linear-gradient(90deg, var(--pink), var(--purple), var(--blue), var(--pink));
+    background-size:300% 100%;
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    animation:borderMove 4s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes borderMove{to{background-position:300% 0}}
+  .vote-box h2{
+    font-size:clamp(1.6rem, 4vw, 2.6rem);
+    font-weight:900;
+    margin-bottom:14px;
+  }
+  .vote-box h2 .grad{
+    background:linear-gradient(90deg, var(--pink), var(--blue));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .vote-box p{color:var(--muted);max-width:520px;margin:0 auto 28px}
+  .soon{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 30px;
+    border-radius:999px;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.2);
+    font-weight:700;
+    letter-spacing:1px;
+    color:var(--muted);
+  }
+  .soon .lock{font-size:1.1rem}
+
+  /* ===== Footer ===== */
+  footer{
+    text-align:center;
+    padding:60px 20px 40px;
+    color:var(--muted);
+    font-size:.85rem;
+    border-top:1px solid rgba(255,255,255,.08);
+    margin-top:40px;
+  }
+  footer .heart{color:var(--pink)}
+
+  @media(max-width:600px){
+    .grid{grid-template-columns:1fr 1fr;gap:12px}
+    .card{padding:18px 14px}
+    .card .artist{font-size:1.05rem}
+    .card .flag{font-size:1.9rem}
+  }
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="stars"></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="badge"><span class="dot"></span> Roblox • 2026</div>
+  <h1 class="title">ПЕРВОЕ<br><span class="grad">ЕВРОВИДЕНИЕ</span><br>В ROBLOX</h1>
+  <p class="subtitle">
+    Грандиозное шоу на арене «Лужники». Страны, номера, голосование зрителей и грандиозный финал — впервые в Roblox.
+  </p>
+  <div class="hero-meta">
+    <div class="meta-card"><div class="label">Дата</div><div class="value">Скоро</div></div>
+    <div class="meta-card"><div class="label">Арена</div><div class="value">Лужники</div></div>
+    <div class="meta-card"><div class="label">Вход</div><div class="value">Свободный</div></div>
+  </div>
+  <a href="#artists" class="btn">Смотреть участников</a>
+</header>
+
+<!-- УЧАСТНИКИ -->
+<section class="section" id="artists">
+  <div class="section-head">
+    <div class="kicker">Line-up</div>
+    <h2>Участники</h2>
+    <p>16 стран. Легенды и мировые хиты на одной сцене.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <!-- СПЕЦГОСТЬ -->
+  <div class="grid" style="margin-top:20px; max-width:340px; margin-left:auto; margin-right:auto">
+    <div class="card special">
+      <span class="flag">🇬🇧</span>
+      <div class="country">Спецгость финала</div>
+      <div class="artist">Adele</div>
+      <span class="tag">Special Guest</span>
+    </div>
+  </div>
+</section>
+
+<!-- ГОЛОСОВАНИЕ -->
+<section class="section" id="vote">
+  <div class="vote-box">
+    <h2>ГОЛОСОВАНИЕ <span class="grad">СКОРО</span></h2>
+    <p>Голосование за лучший номер откроется после старта шоу. Следи за анонсами.</p>
+    <div class="soon"><span class="lock">🔒</span> Откроется позже</div>
+  </div>
+</section>
+
+<footer>
+  Сделано с <span class="heart">♥</span> для Roblox-сообщества • 2026
+</footer>
+
+<script>
+  const artists = [
+    {flag:"🇷🇺", country:"Россия", artist:"Баста"},
+    {flag:"🇺🇸", country:"США", artist:"Lady Gaga"},
+    {flag:"🇬🇧", country:"Великобритания", artist:"Ed Sheeran"},
+    {flag:"🇨🇦", country:"Канада", artist:"The Weeknd"},
+    {flag:"🇫🇷", country:"Франция", artist:"Indila"},
+    {flag:"🇩🇪", country:"Германия", artist:"Rammstein"},
+    {flag:"🇪🇸", country:"Испания", artist:"Rosalía"},
+    {flag:"🇮🇹", country:"Италия", artist:"Eros Ramazzotti"},
+    {flag:"🇸🇪", country:"Швеция", artist:"Zara Larsson"},
+    {flag:"🇳🇴", country:"Норвегия", artist:"Alan Walker"},
+    {flag:"🇳🇱", country:"Нидерланды", artist:"Martin Garrix"},
+    {flag:"🇦🇺", country:"Австралия", artist:"Sia"},
+    {flag:"🇰🇷", country:"Южная Корея", artist:"BTS"},
+    {flag:"🇨🇴", country:"Колумбия", artist:"Shakira"},
+    {flag:"🇳🇬", country:"Нигерия", artist:"Rema"},
+    {flag:"🇵🇷", country:"Пуэрто-Рико", artist:"Bad Bunny"}
+  ];
+
+  const grid = document.getElementById('grid');
+  artists.forEach((a, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <span class="flag">${a.flag}</span>
+      <div class="country">${a.country}</div>
+      <div class="artist">${a.artist}</div>
+    `;
+    grid.appendChild(card);
+    // появление по скроллу
+    setTimeout(() => card.classList.add('visible'), 80 * i);
+  });
+</script>
+</body>
+</html>
